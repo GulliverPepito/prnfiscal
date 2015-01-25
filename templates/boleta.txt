@@ -1,0 +1,23 @@
+
+
+
+
+
+
+|                                                          {{ head.afip_document_class_id.1 }}    {{ head.afip_document_number }}
+
+
+
+                                                {{ head.date_invoice|fecha_sep('d') }} {{ head.date_invoice|fecha_sep('m') }} {{ head.date_invoice|fecha_sep('a') }}
+
+
+
+{%- for p in lines %}
+         {{ p.quantity|integ|righted(2) }}     {{ p.name|fixlen(44) }}  {{ p.price_unit|format_currency|righted(12) }} {{ p.price_subtotal|with_vat|format_currency|righted(12) }}
+{%- endfor %}
+
+               Son Pesos: {{ head.amount_total|componer|part1 }}                {{ head.amount_total|format_currency|righted(12) }}
+               {{ head.amount_total|componer|part2 }}
+               {{ head.amount_total|componer|part3 }}
+               
+               FORMA PAGO: TARJETA EFVO, ETC
