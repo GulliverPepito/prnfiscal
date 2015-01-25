@@ -51,7 +51,7 @@ def format_currency(value):
         if len(porcion) == 0:
             break
         result = porcion + '.' + result
-    return '$ ' + result
+    return result
     #locale.currency(value)
 
 def righted(value,qty):
@@ -61,7 +61,11 @@ def integ(value):
     return str(value)
 
 def fixlen(value,qty):
-    return value.ljust(qty)
+    return value.ljust(qty)[:qty]
+
+def comuna(value):
+    value1 = value.split("/")
+    return value1[2].strip()
 
 def componer(value):
     x = int(value)
@@ -188,6 +192,7 @@ templateEnv.filters['format_vat'] = format_vat
 templateEnv.filters['with_vat'] = with_vat
 templateEnv.filters['fecha_sep'] = fecha_sep
 templateEnv.filters['mes_enletras'] = mes_enletras
+templateEnv.filters['comuna'] = comuna
 
 try:
     printer_name = config['PRINTER']['printer']
@@ -210,6 +215,7 @@ while True:
         if invoice_data == {}:
             continue
 
+        invoice_data['cr'] = "\r\n"
         TEMPLATE_FILE = "templates/" + (invoice_data['head']['afip_document_class_id'][1]).lower() + ".txt"
         template = templateEnv.get_template( TEMPLATE_FILE )
         content = template.render( invoice_data )
@@ -218,7 +224,7 @@ while True:
         #raise SystemExit(0)
         print "\n"
         print ("PRNFISCAL: {} Se imprimio {} Numero: {}").format(datetime.now().strftime("%Y-%m-%d %H:%M"), (invoice_data['head']['afip_document_class_id'][1]).lower(), invoice_data['head']['afip_document_number'])
-        # raise SystemExit(0)
+        #raise SystemExit(0)
         
         pagebreak = chr(12)
 
@@ -240,13 +246,14 @@ while True:
                 win32print.EndDocPrinter (hPrinter)
         finally:
             win32print.ClosePrinter (hPrinter)
-        
+        #raise SystemExit(0)
         # impresión realizada
         if (i_data.update_invoice(invoice_data['head']['id'])):
             print ("PRNFISCAL: {} Se actualizó el estado del comprobante {} {}... ").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),invoice_data["head"]["afip_document_class_id"][1], invoice_data["head"]["afip_document_number"])
 
         print ("PRNFISCAL: {} Esperando nuevo comprobante para imprimir... ").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     else:
+    #except:
         print "fallo el renderizado"
         pass
     

@@ -76,7 +76,7 @@ class i_data(object):
     def get_invoice(self, dbname=dbname, uid=uid, pwd=pwd, sock=sock, max_lineas=max_lineas):
 
         args = [
-            ('invoice_printed', '=', ''),
+            ('invoice_printed', '=', False),
             ('type', '=', 'out_invoice'),
             ('state', '!=', 'draft'),
         ]
@@ -102,7 +102,8 @@ class i_data(object):
             'street',
             'vat',
             'city',
-            'phone'
+            'phone',
+            'state_id',
         ]
 
         account_invoice_line_fields = [
@@ -120,7 +121,9 @@ class i_data(object):
         empty_line = {'product_id': ['', ''], 'sequence': 40, 'price_unit': '', 'price_subtotal': '', 'discount': '', 'quantity': '', 'id': '', 'name': ''}
         
         try:
+            print "consumiendo primer ws..."
             invoice_id = sock.execute(dbname, uid, pwd, 'account.invoice', 'search', args)
+            print invoice_id
         except:
             print """
 
@@ -143,9 +146,14 @@ class i_data(object):
             #print invoice['afip_document_number']
             partner = sock.execute(dbname, uid, pwd, 'res.partner', 'read', invoice['partner_id'][0], res_partner_fields)
             
-            partner['city'] = partner['city'].encode("cp1252")
+            
+            #partner['city'] = partner['city'].encode("cp1252")
             #partner['street'] = partner['street'].encode("cp1252")
             partner['name'] = partner['name'].encode("cp1252")
+            #partner['state_id'][1] = partner['state_id'][1].encode("cp1252")
+            #print partner['state_id'][1] 
+            #raise SystemExit[0]
+            
             
             invoice_data["partner"] = partner
             

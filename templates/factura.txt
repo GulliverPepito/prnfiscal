@@ -1,50 +1,11 @@
+{{ cr }}{{ cr }}{{ cr }}{{ cr }}{{ cr }}
+                                              {{ head.afip_document_class_id.1 }} {{ head.afip_document_number }}
+{{ cr }}{{ cr }}{{ cr }}
+     {{ head.date_invoice|fecha_sep('d') }}        {{ head.date_invoice|fecha_sep('m')|mes_enletras|fixlen(22) }} {{ head.date_invoice|fecha_sep('a') }}{{ cr }}
+       {{ partner.name|fixlen(48) }}  {{ partner.vat|format_vat }}{{ cr }}
+       {% if partner.street %}{{ partner.street|fixlen(48) }}{% else %}                                                {% endif %}    {% if partner.state_id.1 %}{{ partner.state_id.1|comuna|fixlen(16) }}{% else %}                {% endif %}
+       {% if partner.giro %}{{ partner.giro|fixlen(48) }}{% else %}                                                 {% endif %}{{ cr }}
+       {% if head.reference %}{{ partner.reference|fixlen(5) }}{% else %}             {% endif %}{% if partner.city %}{{ partner.city|fixlen(16) }}{% else %}                {% endif %}                   {{ head.date_due|days_between(head.date_invoice) }}{{ cr }}{{ cr }}{{ cr }}
+{% for p in lines %}     {{ p.quantity|format_currency|righted(2) }}  {{ p.name|fixlen(40) }}   {{ p.price_unit|format_currency|righted(9) }}   {{ p.price_subtotal|format_currency|righted(9) }}{{ cr }}{% endfor %}{{ cr }}
 
-
-
-
-
-
-
-
-|                                                          {{ head.afip_document_class_id.1 }}    {{ head.afip_document_number }}
-
-
-
-
-
-
-
-
-          {{ head.date_invoice|fecha_sep('d') }}        {{ head.date_invoice|fecha_sep('m')|mes_enletras|fixlen(22) }} {{ head.date_invoice|fecha_sep('a') }} 
-
-
-             {{ partner.name|fixlen(48) }}  {{ partner.vat|format_vat }}
-
-             {% if partner.street %}{{ partner.street|fixlen(48) }}{% else %}                                                {% endif %}  {% if partner.city %}{{ partner.city|fixlen(16) }}{% else %}                {% endif %}
-
-
-             {% if partner.giro %}{{ partner.giro|fixlen(48) }}{% else %}                                                 {% endif %}  {% if partner.city %}{{ partner.city|fixlen(16) }}{% else %}                {% endif %}
-
-
-               {% if head.reference %}{{ partner.reference|fixlen(5) }}{% else %}     {% endif %}{% if partner.state %}{{ partner.state|fixlen(20) }}{% else %}                    {% endif %}                {{ head.date_due|days_between(head.date_invoice) }}
-
-
-
-
-
-
-{% for p in lines %}{{ p.quantity|integ|righted(2) }}     {{ p.name|fixlen(40) }}  {{ p.price_unit|format_currency|righted(12) }}  {{ p.price_subtotal|format_currency|righted(12) }}
-{% endfor %}
-
-               Son Pesos: {{ head.amount_total|componer|part1 }}
-               {{ head.amount_total|componer|part2 }}
-               {{ head.amount_total|componer|part3 }}
-
-
-
-
-                                                                      {{ head.amount_untaxed|format_currency|righted(12) }}
-
-                                                            19        {{ head.amount_tax|format_currency|righted(12) }}
-
-                                                                      {{ head.amount_total|format_currency|righted(12) }}
+             Pesos: {{ head.amount_total|componer|part1 }}{{ cr }}{{ head.amount_total|componer|part2 }}{{ cr }}{{ head.amount_total|componer|part3 }}{{ cr }}                                                             {{ head.amount_untaxed|format_currency|righted(12) }}{{ cr }}                                                   19        {{ head.amount_tax|format_currency|righted(12) }}{{ cr }}                                                             {{ head.amount_total|format_currency|righted(12) }}
