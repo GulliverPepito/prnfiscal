@@ -218,6 +218,8 @@ while True:
         invoice_data['cr'] = "\r\n"
         TEMPLATE_FILE = "templates/" + (invoice_data['head']['afip_document_class_id'][1]).lower() + ".txt"
         template = templateEnv.get_template( TEMPLATE_FILE )
+        # prueba daniel
+        #print invoice_data
         content = template.render( invoice_data )
         print "termina de renderizar"        
         print content

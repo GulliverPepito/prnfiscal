@@ -44,6 +44,14 @@ except:
     """
     raise SystemExit(0)
 
+try:
+    max_lineas['NV-T'] = config['NV-T']['maxlineas']
+except:
+    print """
+    ERROR: No está definida en el archivo config.ini la 
+    cantidad de lineas de las NOTAS DE VENTA.
+    """
+    raise SystemExit(0)
 
 
 
@@ -149,7 +157,7 @@ class i_data(object):
             
             #partner['city'] = partner['city'].encode("cp1252")
             #partner['street'] = partner['street'].encode("cp1252")
-            partner['name'] = partner['name'].encode("cp1252")
+            #partner['name'] = partner['name'].encode("cp1252")
             #partner['state_id'][1] = partner['state_id'][1].encode("cp1252")
             #print partner['state_id'][1] 
             #raise SystemExit[0]
@@ -189,6 +197,9 @@ class i_data(object):
             except:
                 pass
             print ("PRNFISCAL: {} Imprimiendo {} {}....").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),invoice_data["head"]["afip_document_class_id"][1], invoice_data["head"]["afip_document_number"])
+            print invoice_data["head"]["afip_document_class_id"]
+            print max_lineas[invoice_data["head"]["afip_document_class_id"][1]]
+           
             for x in range( i, int(max_lineas[invoice_data["head"]["afip_document_class_id"][1]]) ):
                 invoice_data["lines"].append(empty_line)
 

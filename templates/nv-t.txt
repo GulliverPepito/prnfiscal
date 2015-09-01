@@ -1,4 +1,4 @@
-{{ cr }}{{ cr }}{{ cr }}                                                             {{ head.afip_document_class_id.1 }}    {{ head.afip_document_number }}
+{{ cr }}{{ cr }}{{ cr }}                                                         {{ head.afip_document_class_id.1 }}    {{ head.afip_document_number }}
 
 {{ cr }}                                           {{ head.date_invoice|fecha_sep('d') }} {{ head.date_invoice|fecha_sep('m') }}   {{ head.date_invoice|fecha_sep('a') }}
 {{ cr }}{{ cr }}
