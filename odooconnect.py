@@ -178,12 +178,13 @@ class i_data(object):
                 #incorporar un proceso para cambiar la codificacion de las lineas
                 # 'sequence',
                 ##'invoice_id',
-                #'price_unit',
-                #'price_subtotal',
-                #'discount',
-                #'product_id',
-                #'quantity',
+                # print invoice_line['price_unit']
+                # print invoice_line['price_subtotal']
+                # print invoice_line['discount']
+                # print invoice_line['product_id']
+                # print invoice_line['quantity']
                 invoice_line['name'] = invoice_line['name'].encode("cp1252")
+                # print invoice_line['name']
                 #encode("cp1252")
                 invoice_data["lines"].append(invoice_line)
                 i += 1

@@ -9,6 +9,9 @@ import time
 import locale
 from odooconnect import config
 
+reload(sys)
+sys.setdefaultencoding('Cp1252')
+
 locale.setlocale(locale.LC_ALL,'esp_esp')
 #locale.setlocale(locale.LC_ALL,'es_CL.utf-8')
 #http://stackoverflow.com/questions/10009753/python-dealing-with-mixed-encoding-files
