@@ -219,7 +219,7 @@ while True:
             continue
 
         invoice_data['cr'] = "\r\n"
-        TEMPLATE_FILE = "templates/" + (invoice_data['head']['afip_document_class_id'][1]).lower() + ".txt"
+        TEMPLATE_FILE = "templates/" + (invoice_data['head']['sii_document_class_id'][1]).lower() + ".txt"
         template = templateEnv.get_template( TEMPLATE_FILE )
         # prueba daniel
         #print invoice_data
@@ -228,7 +228,7 @@ while True:
         print content
         #raise SystemExit(0)
         print "\n"
-        print ("PRNFISCAL: {} Se imprimio {} Numero: {}").format(datetime.now().strftime("%Y-%m-%d %H:%M"), (invoice_data['head']['afip_document_class_id'][1]).lower(), invoice_data['head']['afip_document_number'])
+        print ("PRNFISCAL: {} Se imprimio {} Numero: {}").format(datetime.now().strftime("%Y-%m-%d %H:%M"), (invoice_data['head']['sii_document_class_id'][1]).lower(), invoice_data['head']['sii_document_number'])
         #raise SystemExit(0)
         
         pagebreak = chr(12)
@@ -254,7 +254,7 @@ while True:
         #raise SystemExit(0)
         # impresión realizada
         if (i_data.update_invoice(invoice_data['head']['id'])):
-            print ("PRNFISCAL: {} Se actualizó el estado del comprobante {} {}... ").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),invoice_data["head"]["afip_document_class_id"][1], invoice_data["head"]["afip_document_number"])
+            print ("PRNFISCAL: {} Se actualizó el estado del comprobante {} {}... ").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),invoice_data["head"]["sii_document_class_id"][1], invoice_data["head"]["sii_document_number"])
 
         print ("PRNFISCAL: {} Esperando nuevo comprobante para imprimir... ").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     else:

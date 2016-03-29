@@ -1,5 +1,5 @@
 {{ cr }}{{ cr }}{{ cr }}{{ cr }}{{ cr }}
-                                              {{ head.afip_document_class_id.1 }} {{ head.afip_document_number }}
+                                              {{ head.sii_document_class_id.1 }} {{ head.sii_document_number }}
 {{ cr }}{{ cr }}{{ cr }}
      {{ head.date_invoice|fecha_sep('d') }}        {{ head.date_invoice|fecha_sep('m')|mes_enletras|fixlen(22) }} {{ head.date_invoice|fecha_sep('a') }}{{ cr }}
        {{ partner.name|fixlen(48) }}  {{ partner.vat|format_vat }}{{ cr }}

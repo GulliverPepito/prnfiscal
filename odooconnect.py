@@ -93,8 +93,8 @@ class i_data(object):
             'id',
             'date_invoice',
             'date_due',
-            'afip_document_class_id',
-            'afip_document_number',
+            'sii_document_class_id',
+            'sii_document_number',
             'state', 
             'amount_tax',
             'amount_untaxed',
@@ -151,7 +151,7 @@ class i_data(object):
             invoice_data["head"] = invoice
 
             #print invoice['partner_id'][0]
-            #print invoice['afip_document_number']
+            #print invoice['sii_document_number']
             partner = sock.execute(dbname, uid, pwd, 'res.partner', 'read', invoice['partner_id'][0], res_partner_fields)
             
             
@@ -191,17 +191,17 @@ class i_data(object):
 
             try:
                 if config['PRINTER']['seguridad'] == "ON":
-                    j = input (("PRNFISCAL: Por imprimir {} {}. Presione \"s\" para continuar.").format(invoice_data["head"]["afip_document_class_id"][1], invoice_data["head"]["afip_document_number"]))
+                    j = input (("PRNFISCAL: Por imprimir {} {}. Presione \"s\" para continuar.").format(invoice_data["head"]["sii_document_class_id"][1], invoice_data["head"]["sii_document_number"]))
                     if j[0] != "s":
                         print "Saliendo... Ingrese nuevamente para continuar operando."
                         raise SystemExit(0)
             except:
                 pass
-            print ("PRNFISCAL: {} Imprimiendo {} {}....").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),invoice_data["head"]["afip_document_class_id"][1], invoice_data["head"]["afip_document_number"])
-            print invoice_data["head"]["afip_document_class_id"]
-            print max_lineas[invoice_data["head"]["afip_document_class_id"][1]]
+            print ("PRNFISCAL: {} Imprimiendo {} {}....").format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),invoice_data["head"]["sii_document_class_id"][1], invoice_data["head"]["sii_document_number"])
+            print invoice_data["head"]["sii_document_class_id"]
+            print max_lineas[invoice_data["head"]["sii_document_class_id"][1]]
            
-            for x in range( i, int(max_lineas[invoice_data["head"]["afip_document_class_id"][1]]) ):
+            for x in range( i, int(max_lineas[invoice_data["head"]["sii_document_class_id"][1]]) ):
                 invoice_data["lines"].append(empty_line)
 
         return invoice_data
