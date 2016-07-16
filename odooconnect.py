@@ -86,7 +86,7 @@ class i_data(object):
         args = [
             ('invoice_printed', '=', False),
             ('type', '=', 'out_invoice'),
-            ('state', 'not in', ['draft', 'cancelled']),
+            ('state', 'not in', ['draft', 'cancel']),
         ]
 
         account_invoice_fields = [
